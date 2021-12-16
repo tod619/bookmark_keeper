@@ -33,3 +33,53 @@ h1 {
 h1:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
+
+/* Start: Bokmarks */
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.item {
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border-radius: var(--border-radius);
+  padding: 20px;
+  margin: 10px;
+}
+
+.item:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.fa-times {
+  float: right;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.name {
+  margin: 20px 20px 0 0;
+}
+
+.name img {
+  height: 20px;
+  width: 20px;
+  margin-right: 5px;
+  vertical-align: sub;
+}
+
+.name a {
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: none;
+}
+
+.name a:hover,
+.name a:active {
+  text-decoration: underline;
+}
+/* End: Bookmarks */
