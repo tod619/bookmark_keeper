@@ -83,3 +83,11 @@ h1:hover {
   text-decoration: underline;
 }
 /* End: Bookmarks */
+
+/* Start: Media Query (large Mobile vertical) */
+@media screen and (max-width: 600px) {
+  .container {
+    flex-direction: column;
+  }
+}
+/* End: Media Query (large Mobile vertical) */
