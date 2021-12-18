@@ -23,3 +23,7 @@ function closeModal() {
 modalShow.addEventListener('click', showModal)
 
 modalClose.addEventListener('click', closeModal)
+
+window.addEventListener('click', (e) => {
+    e.target === modal ? closeModal() : false
+})
