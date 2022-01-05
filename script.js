@@ -41,6 +41,8 @@ function validate(nameValue, urlValue) {
 // Insert bookmark data from localstorage to the DOM
 function buildBookmarks() {
     //console.log(bookmarks)
+    // Remove all bookmarks
+    bookmarksContainer.textContent = ''
     bookmarks.forEach((bookmark) => {
         const { name, url } = bookmark
         //console.log(name, url)
@@ -59,8 +61,8 @@ function buildBookmarks() {
         const linkInfo = document.createElement('div')
         linkInfo.classList.add('name')
         const favicon = document.createElement('img')
-        favicon.setAttribute('src', `https://s2.googleusercontent.com/s2/favicon?domain=${url}`)
-        favicon.setAttribute('alt', 'Favicon')
+        favicon.setAttribute('src', `https://s2.googleusercontent.com/s2/favicons?domain=${url}`)
+        favicon.setAttribute('alt', 'favicon')
         // https://s2.googleusercontent.com/s2/favicon?domain=
 
         // Link
@@ -95,6 +97,19 @@ function fetchBookmarks() {
     }
 
     buildBookmarks()
+}
+
+// Delete a bookmark
+function deleteBookmark(url) {
+    bookmarks.forEach((bookmark, i) => {
+        if(bookmark.url === url) {
+            bookmarks.splice(i, 1)
+        }
+    })
+
+    //Update bookmarks array in local storage
+    localStorage.setItem('bookmarks', JSON.stringify(bookmarks))
+    fetchBookmarks()
 }
 
 // handle data from form
