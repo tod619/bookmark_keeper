@@ -38,6 +38,45 @@ function validate(nameValue, urlValue) {
 
 }
 
+// Insert bookmark data from localstorage to the DOM
+function buildBookmarks() {
+    //console.log(bookmarks)
+    bookmarks.forEach((bookmark) => {
+        const { name, url } = bookmark
+        //console.log(name, url)
+
+        //create item
+        const item = document.createElement('div')
+        item.classList.add('item')
+
+        // Close icon
+        const closeIcon = document.createElement('i')
+        closeIcon.classList.add('fas', 'fa-times')
+        closeIcon.setAttribute('title','Delete Bookmark')
+        closeIcon.setAttribute('onclick', `deleteBookmark('${url}')`)
+
+        //Favicon
+        const linkInfo = document.createElement('div')
+        linkInfo.classList.add('name')
+        const favicon = document.createElement('img')
+        favicon.setAttribute('src', `https://s2.googleusercontent.com/s2/favicon?domain=${url}`)
+        favicon.setAttribute('alt', 'Favicon')
+        // https://s2.googleusercontent.com/s2/favicon?domain=
+
+        // Link
+        const link = document.createElement('a')
+        link.setAttribute('href', `${url}`)
+        link.setAttribute('target', '_blank')
+        link.textContent = name
+
+        // Append to bookmarks container
+        linkInfo.append(favicon, link)
+        item.append(closeIcon, linkInfo)
+        bookmarksContainer.appendChild(item)
+    })
+    
+}
+
 // Fetch bookmarks from local storage
 function fetchBookmarks() {
     // Get bookmarks from localstorage if available
@@ -54,6 +93,8 @@ function fetchBookmarks() {
 
         localStorage.setItem('Bookmarks', JSON.stringify(bookmarks))
     }
+
+    buildBookmarks()
 }
 
 // handle data from form
@@ -77,7 +118,6 @@ function storeBookmark(e) {
     bookmarks.push(bookmark)
 
     localStorage.setItem('bookmarks', JSON.stringify(bookmarks))
-    console.log(bookmarks)
     fetchBookmarks()
     bookmarkForm.reset()
     websiteNameEl.focus()
@@ -104,3 +144,4 @@ bookmarkForm.addEventListener('submit', storeBookmark)
 
 // On load fetch bookmarks from local storage
 fetchBookmarks()
+
