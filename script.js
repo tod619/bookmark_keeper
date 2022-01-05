@@ -38,6 +38,24 @@ function validate(nameValue, urlValue) {
 
 }
 
+// Fetch bookmarks from local storage
+function fetchBookmarks() {
+    // Get bookmarks from localstorage if available
+    if(localStorage.getItem('bookmarks')){
+        bookmarks = JSON.parse(localStorage.getItem('bookmarks'))
+    } else {
+        // Create a bookmark example
+        bookmarks = [
+            {
+                name: 'google',
+                url: 'https://google.com',
+            },
+        ]
+
+        localStorage.setItem('Bookmarks', JSON.stringify(bookmarks))
+    }
+}
+
 // handle data from form
 function storeBookmark(e) {
     e.preventDefault()
@@ -58,7 +76,9 @@ function storeBookmark(e) {
 
     bookmarks.push(bookmark)
 
+    localStorage.setItem('bookmarks', JSON.stringify(bookmarks))
     console.log(bookmarks)
+    fetchBookmarks()
     bookmarkForm.reset()
     websiteNameEl.focus()
 
@@ -80,3 +100,7 @@ window.addEventListener('click', (e) => {
 
 // Bookmark event listner
 bookmarkForm.addEventListener('submit', storeBookmark)
+
+
+// On load fetch bookmarks from local storage
+fetchBookmarks()
